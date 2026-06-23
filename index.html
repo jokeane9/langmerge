@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>langmerge — an agentic systems studio</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#0a0a0a;--text:#e8e8e8;--body:#d0d0d0;--muted:#555;--accent:#7a5cd6;--border:#1f1f1f;--rail:215px;--max:600px}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{overflow-y:scroll}
+  body{background:radial-gradient(440px 62% at 108px 46%,rgba(123,99,214,.1),rgba(10,10,10,0) 72%),var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+  .rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);display:flex;align-items:center;justify-content:center;z-index:5}
+  .wordmark{display:flex;flex-direction:column;align-items:center;font-family:'Anton',sans-serif;font-size:clamp(34px,6.2vh,78px);line-height:.95;letter-spacing:.02em;color:#eef2f8;text-shadow:0 0 16px rgba(255,255,255,.3),0 0 44px rgba(255,255,255,.16),0 0 90px rgba(150,122,236,.18);filter:blur(1.4px)}
+
+  .stage{margin-left:var(--rail);min-height:100vh;border-left:1px solid var(--border);position:relative}
+  .stage::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:repeating-linear-gradient(to bottom,rgba(130,130,130,.5) 0 1px,transparent 1px 22px);opacity:.45;pointer-events:none}
+  .rmeta{position:absolute;left:50%;transform:translateX(-50%);writing-mode:vertical-rl;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#3f3f3f}
+  .rmeta.top{top:44px}
+  .rmeta.bot{bottom:44px;color:var(--accent);opacity:.55}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+  header{padding:48px 0 40px;border-bottom:1px solid var(--border);margin-bottom:56px;display:flex;align-items:center;justify-content:space-between}
+  .mark{font-family:ui-monospace,monospace;font-size:14px;color:var(--accent);text-shadow:0 0 8px rgba(139,111,230,.5)}
+  nav{display:flex;gap:24px}
+  nav a{font-size:14px;color:var(--muted);transition:color .15s}
+  nav a:hover{color:var(--text)}
+  h1{font-size:clamp(26px,4.4vw,40px);font-weight:600;line-height:1.18;letter-spacing:-.02em;color:var(--text);max-width:16ch;margin-bottom:14px}
+  .sub{display:block;font-size:17px;color:var(--body);margin-bottom:64px;transition:color .15s}
+  .sub:hover{color:var(--accent)}
+  .lastship{display:inline-flex;align-items:center;gap:7px;font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.04em;color:var(--muted);margin-top:18px;transition:color .15s}
+  .lastship:hover{color:var(--accent)}
+  .lastship .gh{width:13px;height:13px;flex:0 0 auto}
+  .sub b{color:var(--accent);font-weight:500}
+  .lbl{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:6px}
+  section{margin-bottom:64px}
+  a.row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:16px 0;border-bottom:1px solid var(--border)}
+  a.row .nm{flex:0 0 auto;min-width:120px;font-weight:500;color:var(--text)}
+  a.row .ds{flex:1;font-size:15px;color:var(--muted)}
+  a.row .ar{flex:0 0 auto;font-size:13px;color:var(--accent)}
+  .pillar{margin-top:0;border-top:1px solid var(--border);padding:20px 0}
+  summary.ph{font-size:18px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none}
+  summary.ph::-webkit-details-marker{display:none}
+  summary.ph .num{color:var(--accent)}
+  summary.ph .pt{flex:1}
+  summary.ph .chev{color:var(--muted);font-size:13px;transition:transform .18s;transform:rotate(90deg)}
+  details[open] summary.ph .chev{transform:rotate(-90deg)}
+  details.pillar .post:first-of-type{margin-top:16px}
+  details.pillar .post:last-of-type{border-bottom:none;padding-bottom:0}
+  a.post{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--border);font-size:15px;color:var(--body);transition:color .15s}
+  a.post:hover{color:var(--accent)}
+  a.post .ar{font-size:13px;color:var(--muted)}
+  .more{display:inline-block;margin-top:32px;font-size:14px;color:var(--accent)}
+  .contact a{font-size:20px;font-weight:600;color:var(--text);border-bottom:1px solid var(--accent);padding-bottom:3px}
+  footer{padding:48px 0 80px;margin-top:80px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
+  footer a{color:var(--accent)}
+  @media(max-width:700px){
+    .rail{position:static;width:auto;height:120px}
+    .wordmark{flex-direction:row;font-size:34px;filter:blur(1px)}
+    .stage{margin-left:0;border-left:none}
+  }
+</style>
+</head>
+<body>
+  <a class="rail" href="#top" aria-label="langmerge">
+    <span class="rmeta top">agentic studio</span>
+    <span class="wordmark"><span>L</span><span>A</span><span>N</span><span>G</span><span>M</span><span>E</span><span>R</span><span>G</span><span>E</span></span>
+    <span class="rmeta bot">est. 2030</span>
+  </a>
+
+  <div class="stage" id="top">
+    <div class="wrap">
+      <header>
+        <span class="mark">&gt;_</span>
+        <nav><a href="#projects">projects</a><a href="#writing">writing</a><a href="#contact">contact</a></nav>
+      </header>
+
+      <main>
+        <h1>Agentic product studio &amp; consultancy.</h1>
+        <a class="sub" href="#contact"><b>&gt;</b> we build for clients, too →</a>
+
+        <section id="projects">
+          <p class="lbl">Product studio</p>
+          <a class="row" href="https://shelfplugin.com"><span class="nm">Shelf</span><span class="ds">Pricing and discounting agents for Shopify.</span><span class="ar">shelfplugin.com&nbsp;→</span></a>
+          <a class="row" href="https://vizidex.app"><span class="nm">Vizidex</span><span class="ds">AI-visibility audits and agents for brands.</span><span class="ar">vizidex.app&nbsp;→</span></a>
+          <a class="lastship" href="https://github.com/jokeane9" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>last shipped · <span id="lm-ship-time">recently</span></a>
+        </section>
+
+        <section id="writing">
+          <p class="lbl">Development writing</p>
+          <details class="pillar">
+            <summary class="ph"><span class="num">01</span><span class="pt">User co-creation and new design patterns</span><span class="chev">›</span></summary>
+            <a class="post" href="https://killdate.dev/posts/14-building-to-learn"><span>You're not building a product. You're building a question.</span><span class="ar">→</span></a>
+          </details>
+          <details class="pillar">
+            <summary class="ph"><span class="num">02</span><span class="pt">Agentic systems</span><span class="chev">›</span></summary>
+            <a class="post" href="https://killdate.dev/posts/13-drift-detection"><span>When your LLM output stops being what you shipped</span><span class="ar">→</span></a>
+            <a class="post" href="https://killdate.dev/posts/07-kill-dates-and-shipping"><span>Kill dates, and shipping without breaking what's live</span><span class="ar">→</span></a>
+          </details>
+          <details class="pillar">
+            <summary class="ph"><span class="num">03</span><span class="pt">New approaches for software development with Cursor and Claude</span><span class="chev">›</span></summary>
+            <a class="post" href="https://killdate.dev/posts/02-claude-md-is-your-os"><span>Your CLAUDE.md is your operating system</span><span class="ar">→</span></a>
+            <a class="post" href="https://killdate.dev/posts/05-claude-code-vs-cursor"><span>Claude Code vs Cursor — who does what, when</span><span class="ar">→</span></a>
+            <a class="post" href="https://killdate.dev/posts/06-runbooks"><span>Write the plan before the build</span><span class="ar">→</span></a>
+          </details>
+          <a class="lastship" href="https://killdate.dev" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3.5" y="2" width="9" height="12" rx="1.5"/><line x1="5.5" y1="5" x2="10.5" y2="5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="11" x2="8.5" y2="11"/></svg>last post · <span id="lm-post-time">recently</span></a>
+        </section>
+
+        <section id="contact" class="contact">
+          <p class="lbl">Contact</p>
+          <a href="mailto:john@langmerge.com">john@langmerge.com</a>
+        </section>
+      </main>
+
+      <footer><span>langmerge</span><a href="mailto:john@langmerge.com">john@langmerge.com</a></footer>
+    </div>
+  </div>
+  <script>
+  (function(){
+    function rel(ts){var s=Math.floor((Date.now()-new Date(ts).getTime())/1000);
+      if(s<3600)return Math.max(1,Math.floor(s/60))+'m ago';
+      if(s<86400)return Math.floor(s/3600)+'h ago';
+      return Math.floor(s/86400)+'d ago';}
+    var ship=document.getElementById('lm-ship-time');
+    if(ship){
+      ship.textContent=rel('2026-06-22T15:00:00');
+      fetch('https://api.github.com/repos/jokeane9/langmerge/commits?per_page=1')
+        .then(function(r){return r.ok?r.json():null;})
+        .then(function(c){if(c&&c[0]&&c[0].commit)ship.textContent=rel(c[0].commit.author.date);})
+        .catch(function(){});
+    }
+    var post=document.getElementById('lm-post-time');
+    if(post)post.textContent=rel('2026-06-18T12:00:00');
+  })();
+  </script>
+</body>
+</html>
