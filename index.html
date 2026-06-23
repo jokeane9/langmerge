@@ -9,14 +9,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
-  :root{--bg:#0a0a0a;--text:#e8e8e8;--body:#d0d0d0;--muted:#555;--accent:#7a5cd6;--border:#1f1f1f;--rail:215px;--max:600px}
+  :root{--bg:#0a0a0a;--text:#e8e8e8;--body:#d0d0d0;--muted:#555;--accent:#e6e6e6;--border:#1f1f1f;--rail:215px;--max:600px}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{overflow-y:scroll}
-  body{background:radial-gradient(440px 62% at 108px 46%,rgba(123,99,214,.1),rgba(10,10,10,0) 72%),var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{background:radial-gradient(440px 62% at 108px 46%,rgba(255,255,255,.04),rgba(10,10,10,0) 72%),var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
 
   .rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);display:flex;align-items:center;justify-content:center;z-index:5}
-  .wordmark{display:flex;flex-direction:column;align-items:center;font-family:'Anton',sans-serif;font-size:clamp(34px,6.2vh,78px);line-height:.95;letter-spacing:.02em;color:#eef2f8;text-shadow:0 0 16px rgba(255,255,255,.3),0 0 44px rgba(255,255,255,.16),0 0 90px rgba(150,122,236,.18);filter:blur(1.4px)}
+  .wordmark{display:flex;flex-direction:column;align-items:center;font-family:'Anton',sans-serif;font-size:clamp(34px,6.2vh,78px);line-height:.95;letter-spacing:.02em;color:#eef2f8;text-shadow:0 0 16px rgba(255,255,255,.3),0 0 44px rgba(255,255,255,.16),0 0 90px rgba(255,255,255,.14);filter:blur(1.4px)}
 
   .stage{margin-left:var(--rail);min-height:100vh;border-left:1px solid var(--border);position:relative}
   .stage::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:repeating-linear-gradient(to bottom,rgba(130,130,130,.5) 0 1px,transparent 1px 22px);opacity:.45;pointer-events:none}
@@ -25,7 +25,9 @@
   .rmeta.bot{bottom:44px;color:var(--accent);opacity:.55}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
   header{padding:48px 0 40px;border-bottom:1px solid var(--border);margin-bottom:56px;display:flex;align-items:center;justify-content:space-between}
-  .mark{font-family:ui-monospace,monospace;font-size:14px;color:var(--accent);text-shadow:0 0 8px rgba(139,111,230,.5)}
+  .mark{font-family:ui-monospace,monospace;font-size:14px;color:var(--accent);text-shadow:0 0 8px rgba(255,255,255,.35);animation:blink .82s 5}
+  @keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+  @media(prefers-reduced-motion:reduce){.mark{animation:none}}
   nav{display:flex;gap:24px}
   nav a{font-size:14px;color:var(--muted);transition:color .15s}
   nav a:hover{color:var(--text)}
@@ -40,7 +42,7 @@
   section{margin-bottom:64px}
   a.row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:16px 0;border-bottom:1px solid var(--border)}
   a.row .nm{flex:0 0 auto;min-width:120px;font-weight:500;color:var(--text)}
-  a.row .ds{flex:1;font-size:15px;color:var(--muted)}
+  a.row .ds{flex:1;font-size:15px;color:#8a8a8a}
   a.row .ar{flex:0 0 auto;font-size:13px;color:var(--accent)}
   .pillar{margin-top:0;border-top:1px solid var(--border);padding:20px 0}
   summary.ph{font-size:18px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none}
@@ -59,10 +61,29 @@
   footer{padding:48px 0 80px;margin-top:80px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
   footer a{color:var(--accent)}
   @media(max-width:700px){
-    .rail{position:static;width:auto;height:120px}
-    .wordmark{flex-direction:row;font-size:34px;filter:blur(1px)}
+    body{background:radial-gradient(520px 38% at 50% 0,rgba(255,255,255,.05),rgba(10,10,10,0) 70%),var(--bg)}
+    .rail{position:static;width:auto;height:auto;padding:30px 0 10px}
+    .wordmark{flex-direction:row;font-size:clamp(30px,8.5vw,40px);filter:blur(.8px);animation:wmPulse .9s ease-out both}
+    .wordmark span{display:inline-block;animation:wmIn .7s cubic-bezier(.2,.72,.2,1) both}
+    .wordmark span:nth-child(-n+4){--from:-46px}
+    .wordmark span:nth-child(n+5){--from:46px}
+    .rmeta{display:none}
     .stage{margin-left:0;border-left:none}
+    .stage::before{display:none}
+    .wrap{padding:0 20px}
+    header{padding:26px 0 22px;margin-bottom:36px}
+    h1{font-size:clamp(28px,8vw,36px)}
+    .sub{margin-bottom:44px}
+    section{margin-bottom:48px}
+    a.row{flex-direction:column;align-items:flex-start;gap:6px;padding:18px 0}
+    a.row .nm{min-width:0;font-size:17px}
+    a.row .ds{font-size:14px}
+    a.row .ar{font-size:13px;margin-top:2px}
+    footer{padding:36px 0 64px;margin-top:56px}
   }
+  @keyframes wmIn{0%{opacity:0;transform:translateX(var(--from,0))}55%{opacity:1}100%{opacity:1;transform:translateX(0)}}
+  @keyframes wmPulse{0%,55%{filter:blur(1.6px)}70%{filter:blur(0) brightness(1.28)}100%{filter:blur(.8px)}}
+  @media(prefers-reduced-motion:reduce){.wordmark,.wordmark span{animation:none}}
 </style>
 </head>
 <body>
