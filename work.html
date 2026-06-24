@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>langmerge — client work</title>
+<meta name="description" content="We build agentic systems that survive contact with production. Bring the requirements, we ship the system — and leave the artifacts your engineers own." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#0a0a0a;--text:#e8e8e8;--body:#d0d0d0;--muted:#555;--accent:#e6e6e6;--border:#1f1f1f;--rail:215px;--max:600px}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{overflow-y:scroll}
+  body{background:radial-gradient(440px 62% at 108px 46%,rgba(255,255,255,.04),rgba(10,10,10,0) 72%),var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+  .rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);display:flex;align-items:center;justify-content:center;z-index:5}
+  .wordmark{display:flex;flex-direction:column;align-items:center;font-family:'Anton',sans-serif;font-size:clamp(34px,6.2vh,78px);line-height:.95;letter-spacing:.02em;color:#f4f6fb;text-shadow:0 0 2px rgba(255,255,255,.55),0 0 9px rgba(255,255,255,.4),0 0 26px rgba(255,255,255,.26),0 0 60px rgba(232,237,255,.2),0 0 120px rgba(198,210,255,.14);filter:blur(.3px)}
+
+  .stage{margin-left:var(--rail);min-height:100vh;border-left:1px solid var(--border);position:relative}
+  .stage::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:repeating-linear-gradient(to bottom,rgba(130,130,130,.5) 0 1px,transparent 1px 22px);opacity:.45;pointer-events:none}
+  .rmeta{position:absolute;left:50%;transform:translateX(-50%);writing-mode:vertical-rl;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#727272}
+  .rmeta.top{top:44px}
+  .rmeta.bot{bottom:44px;color:var(--accent);opacity:.8}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+  header{padding:48px 0 40px;border-bottom:1px solid var(--border);margin-bottom:56px;display:flex;align-items:center;justify-content:space-between}
+  .mark{font-family:ui-monospace,monospace;font-size:14px;color:var(--accent);text-shadow:0 0 8px rgba(255,255,255,.35);animation:blink .82s 5}
+  @keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+  @media(prefers-reduced-motion:reduce){.mark{animation:none}}
+  nav{display:flex;gap:24px}
+  nav a{font-size:14px;color:var(--muted);transition:color .15s}
+  nav a:hover{color:var(--text)}
+  .back{font-family:ui-monospace,monospace;font-size:12px;color:var(--muted);letter-spacing:.04em;transition:color .15s}
+  .back:hover{color:var(--accent)}
+  h1{font-size:clamp(26px,4.4vw,40px);font-weight:600;line-height:1.18;letter-spacing:-.02em;color:var(--text);max-width:18ch;margin-bottom:14px}
+  .sub{display:block;font-size:17px;color:var(--body);margin-bottom:64px;max-width:46ch}
+  .sub b{color:var(--accent);font-weight:500}
+  .lbl{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:24px}
+  section{margin-bottom:64px}
+  .lead{font-size:17px;color:var(--body);margin-bottom:28px;max-width:48ch}
+  .lead b{color:var(--accent);font-weight:500}
+
+  .point{padding:18px 0;border-bottom:1px solid var(--border)}
+  .point:last-child{border-bottom:none}
+  .point .pt{font-weight:600;color:var(--text);font-size:15px;margin-bottom:4px}
+  .point .pd{font-size:15px;color:#8a8a8a}
+  .point .pd code{font-family:ui-monospace,monospace;font-size:13px;color:var(--body);background:rgba(255,255,255,.04);padding:1px 5px;border-radius:3px}
+  .point .pd i{color:var(--body);font-style:italic}
+
+  .step{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--border)}
+  .step:last-child{border-bottom:none}
+  .step .sn{flex:0 0 auto;font-family:ui-monospace,monospace;font-size:12px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;padding-top:2px;min-width:76px}
+  .step .sb .st{font-weight:600;color:var(--text);font-size:15px;margin-bottom:4px}
+  .step .sb .sd{font-size:15px;color:#8a8a8a}
+  .step .sb .sd code{font-family:ui-monospace,monospace;font-size:13px;color:var(--body);background:rgba(255,255,255,.04);padding:1px 5px;border-radius:3px}
+
+  .eng{padding:20px 0;border-bottom:1px solid var(--border)}
+  .eng:last-child{border-bottom:none}
+  .eng .eh{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:6px}
+  .eng .en{font-weight:600;color:var(--text);font-size:16px}
+  .eng .ed{font-family:ui-monospace,monospace;font-size:12px;color:var(--muted);letter-spacing:.04em;flex:0 0 auto}
+  .eng .eshape{font-size:14px;color:#8a8a8a;margin-bottom:5px}
+  .eng .eout{font-size:14px;color:var(--body)}
+  .eng .eout b{color:var(--accent);font-weight:500}
+  .eng.default{position:relative}
+  .eng.default .en::after{content:"default";font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:2px 6px;border-radius:3px;margin-left:10px;vertical-align:middle}
+
+  .note{font-size:15px;color:#8a8a8a;margin-top:24px;max-width:48ch}
+  .note code{font-family:ui-monospace,monospace;font-size:13px;color:var(--body);background:rgba(255,255,255,.04);padding:1px 5px;border-radius:3px}
+
+  .contact a{font-size:20px;font-weight:600;color:var(--text);border-bottom:1px solid var(--accent);padding-bottom:3px}
+  footer{padding:48px 0 80px;margin-top:80px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
+  footer a{color:var(--accent)}
+  @media(max-width:700px){
+    body{background:radial-gradient(520px 38% at 50% 0,rgba(255,255,255,.05),rgba(10,10,10,0) 70%),var(--bg)}
+    .rail{position:static;width:auto;height:auto;padding:30px 0 10px}
+    .wordmark{flex-direction:row;font-size:clamp(30px,8.5vw,40px);filter:blur(.3px)}
+    .rmeta{display:none}
+    .stage{margin-left:0;border-left:none}
+    .stage::before{display:none}
+    .wrap{padding:0 20px}
+    header{padding:26px 0 22px;margin-bottom:36px}
+    h1{font-size:clamp(28px,8vw,36px)}
+    .sub{margin-bottom:44px}
+    section{margin-bottom:48px}
+    .step{flex-direction:column;gap:4px}
+    .step .sn{min-width:0}
+    .eng .eh{flex-direction:column;gap:2px}
+    footer{padding:36px 0 64px;margin-top:56px}
+  }
+</style>
+</head>
+<body>
+  <a class="rail" href="/" aria-label="langmerge">
+    <span class="rmeta top">agentic studio</span>
+    <span class="wordmark"><span>L</span><span>A</span><span>N</span><span>G</span><span>M</span><span>E</span><span>R</span><span>G</span><span>E</span></span>
+    <span class="rmeta bot">client work</span>
+  </a>
+
+  <div class="stage" id="top">
+    <div class="wrap">
+      <header>
+        <span class="mark">&gt;_</span>
+        <nav><a class="back" href="/">&larr; index</a><a href="#contact">contact</a></nav>
+      </header>
+
+      <main>
+        <h1>Bring the requirements. We ship the system.</h1>
+        <p class="sub"><b>&gt;</b> We build agentic systems that survive contact with production — then leave the artifacts your engineers own.</p>
+
+        <section id="better">
+          <p class="lbl">What we do better</p>
+          <p class="lead"><b>Most teams can prototype an LLM feature in a weekend.</b> The hard part is the next 90 days — drift, eval coverage, cost ceilings, the silent regression that ships because nobody owned the output. That's the part we do.</p>
+          <div class="point"><div class="pt">We treat the model as a moving target, not a dependency.</div><div class="pd">Every system ships with eval harnesses, drift detection, and kill dates — so when behavior changes, you find out before your users do.</div></div>
+          <div class="point"><div class="pt">We build the scaffolding, not just the demo.</div><div class="pd">Prompt versioning, runbooks, the <code>CLAUDE.md</code> that lets <i>your</i> engineers keep moving after we leave. The agent is the easy 20%; we own the 80% that keeps it alive.</div></div>
+          <div class="point"><div class="pt">We leave artifacts, not a black box.</div><div class="pd">Ship a full system <i>and</i> the patterns, runbooks, and docs — so engineers who want to build the way we do can pick up exactly where we left off.</div></div>
+        </section>
+
+        <section id="integrate">
+          <p class="lbl">How we integrate</p>
+          <p class="lead"><b>We embed, we don't hand off.</b> We build in a shared dev repo, prove it there, then push to production safely. You get pull requests, not slide decks.</p>
+          <div class="step"><div class="sn">Week 1</div><div class="sb"><div class="st">We plug in.</div><div class="sd">Dev repo access, a shared channel, a working agent in staging. We map the surface area and write the build plan before we write code.</div></div></div>
+          <div class="step"><div class="sn">Ongoing</div><div class="sb"><div class="st">We work in the open.</div><div class="sd">Daily PRs into the dev repo, async updates, every decision in writing. Your engineers review and merge on their terms as knowledge transfers.</div></div></div>
+          <div class="step"><div class="sn">Ship</div><div class="sb"><div class="st">We go to production safely.</div><div class="sd">Behind feature flags, with evals as the gate and kill dates on anything provisional. Staged rollout, a rollback path that works, nothing live until it clears the bar.</div></div></div>
+          <div class="step"><div class="sn">Exit</div><div class="sb"><div class="st">We leave you self-sufficient.</div><div class="sd">Runbooks, eval suites, and the <code>CLAUDE.md</code> your team owns — so the next release goes out the same safe way, with or without us.</div></div></div>
+        </section>
+
+        <section id="scope">
+          <p class="lbl">How we scope</p>
+          <p class="lead"><b>Fixed scope, fixed price, kill dates on everything.</b> Every engagement names the deliverable, the definition of done, the eval bar it must clear, and the date we hand you the keys.</p>
+          <div class="eng default"><div class="eh"><span class="en">Spec &rarr; Build</span><span class="ed">scoped</span></div><div class="eshape">You bring defined requirements or a set of functionalities; we implement.</div><div class="eout"><b>Full system shipped to spec</b> + the prompt versioning, runbooks, and <code>CLAUDE.md</code> your engineers own.</div></div>
+          <div class="eng"><div class="eh"><span class="en">Sprint</span><span class="ed">1&ndash;2 wks</span></div><div class="eshape">A single agentic feature, scoped and shipped.</div><div class="eout"><b>Working feature in production</b> + evals.</div></div>
+          <div class="eng"><div class="eh"><span class="en">System</span><span class="ed">4&ndash;8 wks</span></div><div class="eshape">A full agentic system, designed and embedded.</div><div class="eout"><b>Live system</b>, your team trained to run it.</div></div>
+          <div class="eng"><div class="eh"><span class="en">Advisory</span><span class="ed">ongoing</span></div><div class="eshape">Architecture review, eval design, drift audits.</div><div class="eout"><b>Confidence your AI features won't rot.</b></div></div>
+          <p class="note"><b style="color:var(--accent);font-weight:500">Spec &rarr; Build is the default lane.</b> Hand us the requirements; we ship the working system and leave behind everything your engineers need to keep developing from our perspective.</p>
+        </section>
+
+        <section id="contact" class="contact">
+          <p class="lbl">Start a build</p>
+          <a href="mailto:john@langmerge.com">john@langmerge.com</a>
+        </section>
+      </main>
+
+      <footer><span><a href="/">langmerge</a></span><a href="mailto:john@langmerge.com">john@langmerge.com</a></footer>
+    </div>
+  </div>
+</body>
+</html>
