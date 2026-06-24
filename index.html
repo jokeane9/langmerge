@@ -16,13 +16,13 @@
   a{color:inherit;text-decoration:none}
 
   .rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);display:flex;align-items:center;justify-content:center;z-index:5}
-  .wordmark{display:flex;flex-direction:column;align-items:center;font-family:'Anton',sans-serif;font-size:clamp(34px,6.2vh,78px);line-height:.95;letter-spacing:.02em;color:#eef2f8;text-shadow:0 0 16px rgba(255,255,255,.3),0 0 44px rgba(255,255,255,.16),0 0 90px rgba(255,255,255,.14);filter:blur(1.4px)}
+  .wordmark{display:flex;flex-direction:column;align-items:center;font-family:'Anton',sans-serif;font-size:clamp(34px,6.2vh,78px);line-height:.95;letter-spacing:.02em;color:#f7f9ff;text-shadow:0 0 7px rgba(226,233,255,.16),0 0 24px rgba(206,218,255,.1),0 0 64px rgba(198,210,255,.06)}
 
   .stage{margin-left:var(--rail);min-height:100vh;border-left:1px solid var(--border);position:relative}
   .stage::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:repeating-linear-gradient(to bottom,rgba(130,130,130,.5) 0 1px,transparent 1px 22px);opacity:.45;pointer-events:none}
-  .rmeta{position:absolute;left:50%;transform:translateX(-50%);writing-mode:vertical-rl;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#3f3f3f}
+  .rmeta{position:absolute;left:50%;transform:translateX(-50%);writing-mode:vertical-rl;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#727272}
   .rmeta.top{top:44px}
-  .rmeta.bot{bottom:44px;color:var(--accent);opacity:.55}
+  .rmeta.bot{bottom:44px;color:var(--accent);opacity:.8}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
   header{padding:48px 0 40px;border-bottom:1px solid var(--border);margin-bottom:56px;display:flex;align-items:center;justify-content:space-between}
   .mark{font-family:ui-monospace,monospace;font-size:14px;color:var(--accent);text-shadow:0 0 8px rgba(255,255,255,.35);animation:blink .82s 5}
@@ -63,7 +63,7 @@
   @media(max-width:700px){
     body{background:radial-gradient(520px 38% at 50% 0,rgba(255,255,255,.05),rgba(10,10,10,0) 70%),var(--bg)}
     .rail{position:static;width:auto;height:auto;padding:30px 0 10px}
-    .wordmark{flex-direction:row;font-size:clamp(30px,8.5vw,40px);filter:blur(.8px);animation:wmPulse .9s ease-out both}
+    .wordmark{flex-direction:row;font-size:clamp(30px,8.5vw,40px);animation:wmPulse .9s ease-out both}
     .wordmark span{display:inline-block;animation:wmIn .7s cubic-bezier(.2,.72,.2,1) both}
     .wordmark span:nth-child(-n+4){--from:-46px}
     .wordmark span:nth-child(n+5){--from:46px}
@@ -82,7 +82,7 @@
     footer{padding:36px 0 64px;margin-top:56px}
   }
   @keyframes wmIn{0%{opacity:0;transform:translateX(var(--from,0))}55%{opacity:1}100%{opacity:1;transform:translateX(0)}}
-  @keyframes wmPulse{0%,55%{filter:blur(1.6px)}70%{filter:blur(0) brightness(1.28)}100%{filter:blur(.8px)}}
+  @keyframes wmPulse{0%,55%{filter:brightness(.9)}70%{filter:brightness(1.32)}100%{filter:brightness(1)}}
   @media(prefers-reduced-motion:reduce){.wordmark,.wordmark span{animation:none}}
 </style>
 </head>
@@ -101,7 +101,7 @@
       </header>
 
       <main>
-        <h1>Agentic product studio &amp; consultancy.</h1>
+        <h1>Agentic systems shop &amp; product studio.</h1>
         <a class="sub" href="#contact"><b>&gt;</b> we build for clients, too →</a>
 
         <section id="projects">
