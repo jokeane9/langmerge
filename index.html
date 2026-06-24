@@ -25,9 +25,11 @@
   .rmeta.bot{bottom:44px;color:var(--accent);opacity:.8}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
   header{padding:48px 0 40px;border-bottom:1px solid var(--border);margin-bottom:56px;display:flex;align-items:center;justify-content:space-between}
-  .mark{font-family:ui-monospace,monospace;font-size:14px;color:var(--accent);text-shadow:0 0 8px rgba(255,255,255,.35);animation:blink .82s 5}
+  .mark{font-family:ui-monospace,monospace;font-size:14px;color:var(--accent);text-shadow:0 0 8px rgba(255,255,255,.35);transition:color .2s}
+  .mark:hover{color:#79b8ff}
+  .mark.blink{color:#79b8ff;text-shadow:0 0 9px rgba(121,184,255,.55);animation:blink .82s 5}
   @keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
-  @media(prefers-reduced-motion:reduce){.mark{animation:none}}
+  @media(prefers-reduced-motion:reduce){.mark.blink{animation:none}}
   nav{display:flex;gap:24px}
   nav a{font-size:14px;color:var(--muted);transition:color .15s}
   nav a:hover{color:var(--text)}
@@ -96,7 +98,7 @@
   <div class="stage" id="top">
     <div class="wrap">
       <header>
-        <span class="mark">&gt;_</span>
+        <a class="mark" href="/" aria-label="return to homepage">&gt;_</a>
         <nav><a href="#projects">projects</a><a href="#writing">writing</a><a href="#contact">contact</a></nav>
       </header>
 
@@ -156,6 +158,12 @@
     }
     var post=document.getElementById('lm-post-time');
     if(post)post.textContent=rel('2026-06-18T12:00:00');
+    var mark=document.querySelector('.mark');
+    if(mark){
+      var burst=function(){mark.classList.add('blink');setTimeout(function(){mark.classList.remove('blink');},4100);};
+      burst();
+      setInterval(burst,10000);
+    }
   })();
   </script>
 </body>
