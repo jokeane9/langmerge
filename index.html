@@ -60,6 +60,9 @@
   a.post .ar{font-size:13px;color:var(--muted)}
   .soon{display:block;margin-top:16px;padding:13px 0;font-size:15px;color:var(--muted);font-style:italic}
   .more{display:inline-block;margin-top:32px;font-size:14px;color:var(--accent)}
+  .bio{font-size:16px;color:var(--body);max-width:54ch;margin-top:18px;line-height:1.7}
+  .bio a{color:var(--accent);border-bottom:1px solid #333;transition:border-color .15s}
+  .bio a:hover{border-color:var(--accent)}
   .contact a{font-size:20px;font-weight:600;color:var(--text);border-bottom:1px solid var(--accent);padding-bottom:3px}
   footer{padding:48px 0 80px;margin-top:80px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
   footer a{color:var(--accent)}
@@ -136,6 +139,11 @@
             <span class="soon">Coming soon</span>
           </details>
           <a class="lastship" href="https://killdate.dev" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3.5" y="2" width="9" height="12" rx="1.5"/><line x1="5.5" y1="5" x2="10.5" y2="5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="11" x2="8.5" y2="11"/></svg>last post · <span id="lm-post-time">recently</span></a>
+        </section>
+
+        <section id="author">
+          <p class="lbl">Author</p>
+          <p class="bio">I'm John — I run langmerge, an agentic systems shop and product studio. I design and ship production AI agents end to end, from my own products — Shelf (pricing and discounting for Shopify) and Vizidex (AI visibility and brand discovery) — to client builds. I write about agentic systems and building software with Cursor and Claude at <a href="https://killdate.dev">killdate.dev</a>.</p>
         </section>
 
         <section id="contact" class="contact">
