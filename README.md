@@ -1,7 +1,7 @@
 # langmerge
 
-An agentic product studio & consultancy — we build digital products with AI agents.
+The product design house of Prima Digital — where new client work starts. We build and ship production AI agents and the systems around them.
 
-Our own software (Shelf, Vizidex) and agentic systems for clients.
+Prima Digital products built here: Shelf, Vizidex.
 
-https://langmerge.com
+https://langmerge.com · https://primadigital.net
