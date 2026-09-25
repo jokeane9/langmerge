@@ -2,3 +2,4 @@
 .deploy/
 .playwright-mcp/
 .DS_Store
+.claude/
